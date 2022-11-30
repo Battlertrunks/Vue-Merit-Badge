@@ -2,7 +2,7 @@
   <v-app>
     <v-app-bar
       app
-      color="primary"
+      color="#FAF6F0"
     >
     </v-app-bar>
 
