@@ -1,10 +1,6 @@
 <template>
   <v-app>
-    <v-app-bar
-      app
-      color="#FAF6F0"
-    >
-    </v-app-bar>
+    <HeadingBar></HeadingBar>
 
     <v-main>
     </v-main>
@@ -12,7 +8,11 @@
 </template>
 
 <script>
+import HeadingBar from './components/layout/HeadingBar.vue';
 export default {
   name: 'App',
+  components: {
+    HeadingBar
+  }
 };
 </script>
