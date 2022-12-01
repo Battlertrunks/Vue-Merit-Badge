@@ -18,4 +18,13 @@ export default [
     image:
       'https://d3h3ny262c73zf.cloudfront.net/Zingerman%27s%20Delicatessen/1621603795939.png',
   },
+  {
+    id: 'f3',
+    title: '#18 Georgia Reuben',
+    description:
+      "All-natural, preservative-free turkey breast, Swiss Emmental cheese, coleslaw & our own Russian dressing on grilled Jewish Rye bread from Zingerman's Bakehouse.",
+    price: 18.99,
+    image:
+      'https://d3h3ny262c73zf.cloudfront.net/Zingerman%27s%20Delicatessen/1558118475126.png',
+  },
 ];
