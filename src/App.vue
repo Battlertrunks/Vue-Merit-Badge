@@ -32,8 +32,10 @@ h4 {
   font-family: 'Karma';
 }
 /* Sets body typeface */
-p {
+p,
+span {
   font-family: 'Gafata';
-  font-size: 12px;
+  font-size: 14px;
+  line-height: 1.112rem;
 }
 </style>

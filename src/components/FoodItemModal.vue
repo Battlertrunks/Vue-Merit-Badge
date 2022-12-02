@@ -19,6 +19,9 @@
           alt="food image."
         ></v-img>
         <p>{{ itemDetails.description }}</p>
+        <div>
+          <span>${{ itemDetails.price }}</span>
+        </div>
       </template>
     </base-modal>
   </transition>
@@ -49,5 +52,8 @@ export default {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
+}
+span {
+  font-size: 18px;
 }
 </style>

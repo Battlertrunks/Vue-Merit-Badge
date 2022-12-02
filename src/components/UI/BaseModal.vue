@@ -1,17 +1,25 @@
 <template>
-  <v-card class="modal" width="90%">
-    <div>
-      <header>
-        <slot name="header"></slot>
-      </header>
-      <main class="main-body">
-        <slot></slot>
-      </main>
-    </div>
-  </v-card>
+  <v-overlay>
+    <v-card class="modal" width="95%" color="#FAF6F0">
+      <div>
+        <header>
+          <slot name="header"></slot>
+        </header>
+        <main class="main-body">
+          <slot></slot>
+        </main>
+      </div>
+    </v-card>
+  </v-overlay>
 </template>
 
 <style>
+p,
+h3,
+span {
+  color: #333;
+}
+
 .modal {
   position: fixed;
   top: 50%;
@@ -23,6 +31,10 @@
 .modal .main-body * {
   display: flex;
   flex-direction: column;
+}
+
+.modal .main-body p {
+  margin: 2rem 0;
 }
 
 .modal .item-img {
