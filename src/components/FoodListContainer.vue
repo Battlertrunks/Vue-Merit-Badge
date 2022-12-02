@@ -4,7 +4,7 @@
     <ul>
       <li v-for="item in foodItems" :key="item.id">
         <base-card class="pa-5">
-          <div class="title-price-container">
+          <div class="title-price-container" @click="openModal(item)">
             <h4>{{ item.title }}</h4>
             <p>${{ item.price }}</p>
           </div>
@@ -20,21 +20,36 @@
         </base-card>
       </li>
     </ul>
+    <food-item-modal
+      v-if="showModal"
+      :item-details="modalItem"
+    ></food-item-modal>
   </v-container>
 </template>
 
 <script>
 import dummyData from '@/data/dummyData';
 import BaseCard from './UI/BaseCard.vue';
+import FoodItemModal from './FoodItemModal.vue';
 
 export default {
   data() {
     return {
       foodItems: null,
+      showModal: false,
+      modalItem: null,
     };
   },
   components: {
     BaseCard,
+    FoodItemModal,
+  },
+  methods: {
+    openModal(foodItem) {
+      console.log('hello.');
+      this.modalItem = foodItem;
+      this.showModal = true;
+    },
   },
   mounted() {
     this.foodItems = [...dummyData];
