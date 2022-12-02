@@ -23,6 +23,7 @@
     <food-item-modal
       v-if="showModal"
       :item-details="modalItem"
+      @close-modal="closingModal()"
     ></food-item-modal>
   </v-container>
 </template>
@@ -46,9 +47,12 @@ export default {
   },
   methods: {
     openModal(foodItem) {
-      console.log('hello.');
       this.modalItem = foodItem;
       this.showModal = true;
+    },
+    closingModal() {
+      this.showModal = false;
+      this.modalItem = null;
     },
   },
   mounted() {
@@ -83,7 +87,12 @@ div {
 .desc-image-container p {
   width: 100%;
   margin-right: 1.112rem;
-  font-size: 12px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
 }
 
 .item-img {

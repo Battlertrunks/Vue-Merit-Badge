@@ -1,10 +1,10 @@
 <template>
-  <v-card class="modal">
+  <v-card class="modal" width="90%">
     <div>
       <header>
         <slot name="header"></slot>
       </header>
-      <main>
+      <main class="main-body">
         <slot></slot>
       </main>
     </div>
@@ -20,8 +20,12 @@
   padding: 2rem;
 }
 
-.modal div * {
+.modal .main-body * {
   display: flex;
   flex-direction: column;
+}
+
+.modal .item-img {
+  border-radius: 0.334rem;
 }
 </style>

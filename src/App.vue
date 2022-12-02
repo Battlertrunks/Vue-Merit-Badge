@@ -22,3 +22,18 @@ export default {
   },
 };
 </script>
+
+<style>
+/* Sets heading typeface */
+h1,
+h2,
+h3,
+h4 {
+  font-family: 'Karma';
+}
+/* Sets body typeface */
+p {
+  font-family: 'Gafata';
+  font-size: 12px;
+}
+</style>
