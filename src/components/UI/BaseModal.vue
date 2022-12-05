@@ -34,7 +34,7 @@ span {
 }
 
 .modal .main-body p {
-  margin: 2rem 0;
+  margin: 1rem 0;
 }
 
 .modal .item-img {
