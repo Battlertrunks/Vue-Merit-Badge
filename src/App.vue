@@ -33,11 +33,13 @@ h4 {
 }
 /* Sets body typeface */
 p,
-span {
+span,
+a {
   font-family: 'Gafata';
   font-size: 14px;
   line-height: 1.112rem;
   padding: 0;
   margin: 0;
+  color: #222;
 }
 </style>

@@ -19,57 +19,75 @@
       </v-app-bar>
     </v-card>
     <v-navigation-drawer v-model="drawer" absolute left temporary>
-      <h2>What's on the Menu?</h2>
-      <ul class="pop-items">
-        <li>
-          <p>Popular Choices</p>
-        </li>
-      </ul>
-      <h3>Appitizers</h3>
-      <ul>
-        <li>
-          <p>Soups</p>
-        </li>
-        <li>
-          <p>Deli Slides</p>
-        </li>
-        <li>
-          <p>Jewish Sides</p>
-        </li>
-      </ul>
-      <h3>Sandwiches</h3>
-      <ul>
-        <li>
-          <p>Corned Beef</p>
-        </li>
-        <li>
-          <p>Pastrami</p>
-        </li>
-        <li>
-          <p>Beef</p>
-        </li>
-        <li>
-          <p>Turkey</p>
-        </li>
-        <li>
-          <p>Chicken</p>
-        </li>
-        <li>
-          <p>Pork</p>
-        </li>
-        <li>
-          <p>Fish</p>
-        </li>
-      </ul>
-      <h3>Other Options</h3>
-      <ul>
-        <li>
-          <p>Kids Menu</p>
-        </li>
-        <li>
-          <p>Desserts</p>
-        </li>
-      </ul>
+      <section class="select-container">
+        <div>
+          <v-select
+            :items="locations"
+            label="Select Location"
+            dense
+            single-line
+            hint="422 Detroit St, Ann Arbor..."
+            persistent-hint
+          ></v-select>
+        </div>
+        <div class="hour-service-container">
+          <h4>Hours of Service</h4>
+          <p>Thu 10:30am - 6:45pm (ET)</p>
+        </div>
+      </section>
+      <div class="list-items">
+        <h2>What's on the Menu?</h2>
+        <ul class="pop-items">
+          <li>
+            <a src="">Popular Choices</a>
+          </li>
+        </ul>
+        <h3>Appitizers</h3>
+        <ul>
+          <li>
+            <a src="">Soups</a>
+          </li>
+          <li>
+            <a src="">Deli Slides</a>
+          </li>
+          <li>
+            <a src="">Jewish Sides</a>
+          </li>
+        </ul>
+        <h3>Sandwiches</h3>
+        <ul>
+          <li>
+            <a src="">Corned Beef</a>
+          </li>
+          <li>
+            <a src="">Pastrami</a>
+          </li>
+          <li>
+            <a src="">Beef</a>
+          </li>
+          <li>
+            <a src="">Turkey</a>
+          </li>
+          <li>
+            <a src="">Chicken</a>
+          </li>
+          <li>
+            <a src="">Pork</a>
+          </li>
+          <li>
+            <a src="">Fish</a>
+          </li>
+        </ul>
+        <h3>Other Options</h3>
+        <ul>
+          <li>
+            <a src="">Kids Menu</a>
+          </li>
+          <li>
+            <a src="">Desserts</a>
+          </li>
+        </ul>
+      </div>
     </v-navigation-drawer>
   </div>
 </template>
@@ -78,8 +96,9 @@
 export default {
   data() {
     return {
-      drawer: false,
+      drawer: true,
       group: null,
+      locations: ['Detroit', 'Ann Arbor'],
     };
   },
   watch: {
@@ -93,8 +112,12 @@ export default {
 <style scoped>
 h2,
 h3,
+h4,
 p {
   font-family: 'intra', sans-serif;
+}
+h4 {
+  font-size: 0.652rem;
 }
 .header-container div {
   display: flex;
@@ -102,32 +125,69 @@ p {
   flex-wrap: wrap;
   justify-content: space-between;
 }
-
 .cart-icon {
   padding: 0 20px;
+}
+.v-select {
+  width: 75%;
+  max-width: 12rem;
+  font-size: 1rem;
+  margin-top: 0;
+}
+::v-deep .v-select .v-label {
+  font-size: 10px;
+}
+::v-deep .v-select .v-messages__message {
+  font-size: 0.482rem;
 }
 ul {
   padding: 0;
   margin: 0;
   list-style: none;
 }
-.pop-items {
-  margin-top: 1rem;
+.select-container {
+  display: flex;
+  align-items: flex-start;
+  margin: 0.552rem;
+  padding: 0.325rem;
+}
+.select-container h3 {
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 0.782rem;
+}
+.hour-service-container {
+  text-align: right;
+  width: 65%;
+  margin: 0.5rem 0;
+}
+.select-container p {
+  font-size: 0.482rem;
+  margin: 0;
 }
 .v-navigation-drawer h2 {
   font-size: 1.115rem;
   font-family: 'intra', sans-serif;
   padding: 0 1rem;
 }
-.v-navigation-drawer h3 {
+.v-navigation-drawer .list-items h3 {
   font-size: 0.875rem;
   text-decoration: underline;
   padding: 0 1rem;
 }
-ul p {
-  font-size: 0.765rem;
-  font-weight: 500;
-  margin: 0;
-  padding: 0.555rem 1.665rem;
+li {
+  margin: 0.245rem 0.852rem;
+}
+.v-application a {
+  display: inline-block;
+  padding: 0.333rem 0.442rem;
+  width: 100%;
+  font-size: 0.772rem;
+  border-radius: 0.225rem;
+  color: #222;
+}
+a:hover {
+  transition: 1s background-color ease;
+  background-color: #999;
 }
 </style>
