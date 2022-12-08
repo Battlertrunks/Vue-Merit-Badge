@@ -14,6 +14,7 @@
           <v-icon
             class="fa-solid fa-cart-shopping cart-icon"
             color="#222"
+            @click="openCheckout"
           ></v-icon>
         </div>
       </v-app-bar>
@@ -102,10 +103,16 @@
 export default {
   data() {
     return {
-      drawer: true,
+      drawer: false,
       group: null,
       locations: ['Detroit', 'Ann Arbor'],
     };
+  },
+  methods: {
+    openCheckout() {
+      console.log('run');
+      this.$emit('open-checkout');
+    },
   },
   watch: {
     group() {
