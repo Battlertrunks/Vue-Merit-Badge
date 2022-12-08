@@ -29,13 +29,13 @@ h1,
 h2,
 h3,
 h4 {
-  font-family: 'Karma';
+  font-family: 'Karma', serif;
 }
 /* Sets body typeface */
 p,
 span,
 a {
-  font-family: 'Gafata';
+  font-family: 'Gafata', sans-serif;
   font-size: 14px;
   line-height: 1.112rem;
   padding: 0;

@@ -25,12 +25,12 @@
         <div class="bottom-content">
           <span>${{ itemDetails.price }}</span>
           <div class="button-container">
-            <button @click="subtractOrder">
+            <button class="subtract-cart-btn" @click="subtractOrder">
               <v-icon class="fa-solid fa-minus"></v-icon>
             </button>
-            <p>{{ checkedOutAmount }}</p>
-            <button @click="addOrder">
-              <v-icon class="fa-solid fa-plus"></v-icon>
+            <input v-model="checkedOutAmount" />
+            <button class="add-cart-btn" @click="addOrder">
+              <v-icon class="fa-solid fa-cart-plus"></v-icon>
             </button>
           </div>
         </div>
@@ -96,8 +96,16 @@ span {
 }
 
 .button-container button {
-  background-color: #f29c1c;
   padding: 0.442rem 0.654rem;
+}
+.button-container i {
+  font-size: 1.325rem;
+}
+.subtract-cart-btn {
+  background-color: #f29c1c;
+}
+.add-cart-btn {
+  background-color: #4fb370;
 }
 .button-container button:first-child {
   border-top-left-radius: 0.332rem;
@@ -107,10 +115,14 @@ span {
   border-top-right-radius: 0.332rem;
   border-bottom-right-radius: 0.332rem;
 }
-.button-container p {
+.button-container input {
   padding: 0.442rem 0;
-  margin: 0 0.882rem;
-  width: 1rem;
+  margin: 0;
+  width: 2.25rem;
   text-align: center;
+  font-family: 'Gafata', sans-serif;
+}
+.button-container input:focus {
+  outline: none;
 }
 </style>

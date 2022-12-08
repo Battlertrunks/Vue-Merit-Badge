@@ -19,6 +19,12 @@
       </v-app-bar>
     </v-card>
     <v-navigation-drawer v-model="drawer" absolute left temporary>
+      <v-icon
+        :class="`fa-regular fa-circle-left close-icon ${
+          drawer ? 'move-close-icon' : ''
+        }`"
+        @click="drawer = false"
+      ></v-icon>
       <section class="select-container">
         <div>
           <v-select
@@ -109,7 +115,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 h2,
 h3,
 h4,
@@ -127,6 +133,16 @@ h4 {
 }
 .cart-icon {
   padding: 0 20px;
+}
+.close-icon {
+  position: relative;
+  left: 70%;
+  top: 0.665rem;
+  color: #222;
+  transition: 0.35s left ease-out;
+}
+.move-close-icon {
+  left: 85%;
 }
 .v-select {
   width: 75%;
@@ -176,7 +192,7 @@ ul {
   padding: 0 1rem;
 }
 li {
-  margin: 0.245rem 0.852rem;
+  margin: 0.245rem 0.445rem;
 }
 .v-application a {
   display: inline-block;
@@ -185,6 +201,10 @@ li {
   font-size: 0.772rem;
   border-radius: 0.225rem;
   color: #222;
+}
+.v-application a:hover {
+  transition: 0.25s padding ease-out;
+  padding-left: 0.825rem;
 }
 a:hover {
   transition: 1s background-color ease;
