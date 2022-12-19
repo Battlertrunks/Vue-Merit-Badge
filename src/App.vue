@@ -3,7 +3,7 @@
     <heading-bar v-on:open-checkout="openCheckout"></heading-bar>
     <v-main>
       <food-list-container></food-list-container>
-      <checkout-modal v-if="checkoutVisible"></checkout-modal>
+      <checkout-modal v-if="checkoutVisible" @close-checkout="closeCheckout"></checkout-modal>
     </v-main>
     <footer-bar></footer-bar>
   </v-app>
@@ -30,9 +30,11 @@ export default {
   },
   methods: {
     openCheckout() {
-      console.log('App');
       this.checkoutVisible = true;
     },
+    closeCheckout() {
+      this.checkoutVisible = false;
+    }
   },
 };
 </script>
