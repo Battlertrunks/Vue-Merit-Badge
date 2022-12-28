@@ -28,7 +28,7 @@
             <button class="subtract-cart-btn" @click="subtractOrder">
               <v-icon class="fa-solid fa-minus"></v-icon>
             </button>
-            <input v-model="checkedOutAmount" />
+            <input v-model="inCartAmount" />
             <button class="add-cart-btn" @click="addOrder">
               <v-icon class="fa-solid fa-cart-plus"></v-icon>
             </button>
@@ -51,22 +51,29 @@ export default {
       required: true,
     },
   },
-  data() {
-    return {
-      checkedOutAmount: 0,
-    };
+  computed: {
+    inCartAmount() {
+      const amount = this.$store.getters.checkoutItems.find(foodItem => foodItem.id === this.itemDetails.id).amount;
+      if (amount) {
+        return amount;
+      } else {
+        return 0;
+      }
+    }
   },
   methods: {
     closeModel() {
       this.$emit('close-modal');
     },
     addOrder() {
-      if (this.checkedOutAmount >= 99) this.checkedOutAmount = 99;
-      else this.checkedOutAmount++;
+      if (this.inCartAmount < 99) {
+        this.$store.dispatch('addToCart', this.itemDetails);
+      }
     },
     subtractOrder() {
-      if (this.checkedOutAmount <= 0) this.checkedOutAmount = 0;
-      else this.checkedOutAmount--;
+      if (this.inCartAmount > 0) {
+        this.$store.dispatch('subtractFromCart', this.itemDetails);
+      }
     },
   },
 };

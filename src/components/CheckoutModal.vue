@@ -1,5 +1,5 @@
 <template>
-  <base-modal>
+  <base-modal checkout="checkout">
     <template v-slot:header>
       <header>
         <div class="header-container">
@@ -17,29 +17,31 @@
       </header>
     </template>
     <template>
-      <base-card :card-color="'#fff'" class="pa-4">
-        <div class="title-price-container" @click="openModal(item)">
-          <h4>{{ inCart[0].title }}</h4>
-          <p>${{ inCart[0].price }}</p>
-        </div>
-        <div class="desc-image-container">
-          <div class="button-container">
-            <button class="subtract-cart-btn" @click="subtractOrder">
-              <v-icon class="fa-solid fa-minus"></v-icon>
-            </button>
-            <input v-model="checkedOutAmount" />
-            <button class="add-cart-btn" @click="addOrder">
-              <v-icon class="fa-solid fa-cart-plus"></v-icon>
-            </button>
+      <section class="item-container">
+        <base-card :card-color="'#fff'" class="pa-4 my-2" v-for="item in inCart" :key="item.id">
+          <div class="title-price-container" @click="openModal(item)">
+            <h4>{{ item.title }}</h4>
+            <p>${{ item.price }}</p>
           </div>
-          <v-img
-            class="item-img"
-            :src="inCart[0].image"
-            max-width="100"
-            min-height="75"
-          ></v-img>
-        </div>
-      </base-card>
+          <div class="desc-image-container">
+            <div class="button-container">
+              <button class="subtract-cart-btn" @click="subtractOrder">
+                <v-icon class="fa-solid fa-minus"></v-icon>
+              </button>
+              <input v-model="checkedOutAmount" />
+              <button class="add-cart-btn" @click="addOrder">
+                <v-icon class="fa-solid fa-cart-plus"></v-icon>
+              </button>
+            </div>
+            <v-img
+              class="item-img"
+              :src="item.image"
+              max-width="100"
+              min-height="75"
+            ></v-img>
+          </div>
+        </base-card>
+      </section>
     </template>
     <section class="total-container">
       <p>Total: $0.00</p>
@@ -58,12 +60,12 @@ export default {
   },
   data() {
     return {
-      checkedOutAmount: 0
+      checkedOutAmount: 0,
     }
   },
   computed: {
     inCart() {
-      return this.$store.state.foodInCart;
+      return this.$store.getters.checkoutItems
     },
   },
   methods: {
@@ -143,12 +145,18 @@ export default {
   /* margin-right: .882rem;
   margin-bottom: .882rem; */
 }
+.item-container {
+  height: 20rem;
+  overflow-y: scroll;
+}
 .total-container {
   background-color: #fff;
   flex-direction: row;
   justify-content: space-between;
-  margin: -2rem;
-  margin-top: 2rem;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
   padding: 0 1rem;
   border-bottom-left-radius: .334rem;
   border-bottom-right-radius: .334rem;

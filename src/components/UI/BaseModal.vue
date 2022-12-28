@@ -1,6 +1,6 @@
 <template>
   <v-overlay>
-    <v-card class="modal" width="95%" color="#FAF6F0">
+    <v-card class="modal" width="95%" color="#FAF6F0" :height="checkout ? '30rem' : null">
       <div>
         <header>
           <slot name="header"></slot>
@@ -12,6 +12,17 @@
     </v-card>
   </v-overlay>
 </template>
+
+<script>
+
+export default {
+  props: {
+    checkout: {
+      default: null
+    }
+  }
+}
+</script>
 
 <style>
 p,
