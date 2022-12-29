@@ -25,11 +25,11 @@
         <div class="bottom-content">
           <span>${{ itemDetails.price }}</span>
           <div class="button-container">
-            <button class="subtract-cart-btn" @click="subtractOrder">
+            <button class="subtract-cart-btn" @click="changeOrderAmount(cartAmount-1)">
               <v-icon class="fa-solid fa-minus"></v-icon>
             </button>
-            <input v-model="inCartAmount" />
-            <button class="add-cart-btn" @click="addOrder">
+            <input v-model.number="cartAmount" v-on:change="inCartAmount" type="number" />
+            <button class="add-cart-btn" @click="changeOrderAmount(cartAmount+1)">
               <v-icon class="fa-solid fa-cart-plus"></v-icon>
             </button>
           </div>
@@ -51,30 +51,57 @@ export default {
       required: true,
     },
   },
-  computed: {
-    inCartAmount() {
-      const amount = this.$store.getters.checkoutItems.find(foodItem => foodItem.id === this.itemDetails.id).amount;
-      if (amount) {
-        return amount;
-      } else {
-        return 0;
+  data() {
+    return {
+      cartAmount: this.existInCart()
+    }
+  },
+  watch: {
+    cartAmount(newAmount, oldAmount) {
+      if (newAmount !== oldAmount && newAmount !== oldAmount+1 && newAmount !== oldAmount-1) {
+        this.changeOrderAmount(parseInt(newAmount));
       }
     }
   },
   methods: {
+    existInCart() {
+      const item = this.$store.getters.checkoutItems.find(foodItem => foodItem.id === this.itemDetails.id);
+      if (item) {
+        return item.amount;
+      } else {
+        return 0;
+      }
+    },
     closeModel() {
       this.$emit('close-modal');
     },
-    addOrder() {
-      if (this.inCartAmount < 99) {
-        this.$store.dispatch('addToCart', this.itemDetails);
+    // This is god awful code that needs to be refactored in the future...
+    changeOrderAmount(amount) {
+      const amountChecked = this.inCartAmount();
+      if (amountChecked <= 99 && amountChecked >= 0) {
+        console.log(amountChecked, 'wat');
+        this.$store.dispatch('changeCartAmount', { 
+          item: this.itemDetails, amount: amount < 0 ? 0 
+          : amount > 99 ? 99 : amount 
+        });
+        this.inCartAmount();
+      } else if (amountChecked >= 100) {
+        this.$store.dispatch('changeCartAmount', { item: this.itemDetails, amount: 99 });
+      } else if (amountChecked <= -1) {
+        this.$store.dispatch('changeCartAmount', { item: this.itemDetails, amount: 0 });
       }
+      console.log(this.$store.getters.checkoutItems);
     },
-    subtractOrder() {
-      if (this.inCartAmount > 0) {
-        this.$store.dispatch('subtractFromCart', this.itemDetails);
+    inCartAmount() {
+      let amount = this.existInCart();
+      console.log(amount);
+      if (amount >= 1) {
+        this.cartAmount = amount;
+        return this.cartAmount;
+      } else {
+        return this.cartAmount = 0;
       }
-    },
+    }
   },
 };
 </script>

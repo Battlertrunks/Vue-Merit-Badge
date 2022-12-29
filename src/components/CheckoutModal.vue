@@ -25,11 +25,11 @@
           </div>
           <div class="desc-image-container">
             <div class="button-container">
-              <button class="subtract-cart-btn" @click="subtractOrder">
+              <button class="subtract-cart-btn" @click="changeOrderAmount(item.amount-1, item)">
                 <v-icon class="fa-solid fa-minus"></v-icon>
               </button>
-              <input v-model="checkedOutAmount" />
-              <button class="add-cart-btn" @click="addOrder">
+              <input v-model.number="item.amount" v-on:change="inCartAmount(item)" type="number" />
+              <button class="add-cart-btn" @click="changeOrderAmount(item.amount+1, item)">
                 <v-icon class="fa-solid fa-cart-plus"></v-icon>
               </button>
             </div>
@@ -58,21 +58,40 @@ export default {
     BaseModal,
     BaseCard,
   },
-  data() {
-    return {
-      checkedOutAmount: 0,
-    }
-  },
   computed: {
     inCart() {
-      return this.$store.getters.checkoutItems
+      return this.$store.getters.checkoutItems;
     },
   },
   methods: {
-    addOrder() {},
-    subtractOrder() {},
     closeModel() {
       this.$emit('close-checkout')
+    },
+    // This is god awful code that needs to be refactored in the future...
+    changeOrderAmount(amount, item) {
+      const amountChecked = this.inCartAmount(item);
+      if (amountChecked <= 99 && amountChecked >= 0) {
+        console.log(amountChecked, 'wat');
+        this.$store.dispatch('changeCartAmount', { 
+          item: item, amount: amount < 0 ? 0 
+          : amount > 99 ? 99 : amount 
+        });
+        this.inCartAmount(item);
+      } else if (amountChecked >= 100) {
+        this.$store.dispatch('changeCartAmount', { item: this.itemDetails, amount: 99 });
+      } else if (amountChecked <= -1) {
+        this.$store.dispatch('changeCartAmount', { item: this.itemDetails, amount: 0 });
+      }
+    },
+    inCartAmount(item) {
+      let amount = this.$store.getters.checkoutItems.find(foodItem => foodItem.id === item.id).amount;
+      console.log(amount);
+      if (amount >= 1) {
+        item.amount = amount;
+        return item.amount;
+      } else {
+        return item.amount = 0;
+      }
     }
   }
 };
