@@ -15,6 +15,7 @@
             class="fa-solid fa-cart-shopping cart-icon"
             color="#222"
             @click="openCheckout"
+            v-ripple="false"
           ></v-icon>
         </div>
       </v-app-bar>

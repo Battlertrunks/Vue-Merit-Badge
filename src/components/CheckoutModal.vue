@@ -44,7 +44,7 @@
       </section>
     </template>
     <section class="total-container">
-      <p>Total: $0.00</p>
+      <p>Total: ${{ totalCost }}</p>
       <p>Sub-Total: $0.00</p>
     </section>
   </base-modal>
@@ -62,6 +62,14 @@ export default {
     inCart() {
       return this.$store.getters.checkoutItems;
     },
+    totalCost() {
+      const cart = this.$store.getters.checkoutItems;
+      if (cart.length) {
+        return cart.reduce((acc, cur) => acc + (cur.price * cur.amount), 0).toFixed(2);
+      } else {
+        return '0.00';
+      }
+    }
   },
   methods: {
     closeModel() {
@@ -76,18 +84,24 @@ export default {
           item: item, amount: amount < 0 ? 0 
           : amount > 99 ? 99 : amount 
         });
-        this.inCartAmount(item);
+
+        if (this.inCartAmount(item) === 0) {
+          console.log('runs')
+          this.$store.dispatch('removeFromCart', item);
+        }
+
       } else if (amountChecked >= 100) {
-        this.$store.dispatch('changeCartAmount', { item: this.itemDetails, amount: 99 });
+        this.$store.dispatch('changeCartAmount', { item: item, amount: 99 });
       } else if (amountChecked <= -1) {
-        this.$store.dispatch('changeCartAmount', { item: this.itemDetails, amount: 0 });
+        this.$store.dispatch('changeCartAmount', { item: item, amount: 0 });
       }
     },
     inCartAmount(item) {
-      let amount = this.$store.getters.checkoutItems.find(foodItem => foodItem.id === item.id).amount;
+      console.log(this.$store.getters.checkoutItems);
+      let amount = this.$store.getters.checkoutItems.find(foodItem => foodItem.id === item.id);
       console.log(amount);
-      if (amount >= 1) {
-        item.amount = amount;
+      if (amount) {
+        item.amount = amount.amount;
         return item.amount;
       } else {
         return item.amount = 0;

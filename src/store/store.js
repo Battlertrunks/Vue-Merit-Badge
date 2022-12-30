@@ -8,16 +8,7 @@ import inCartGetters from './modules/inCart/getters.js';
 Vue.use(Vuex);
 
 const state = {
-  foodInCart: [
-    {
-      id: 'f1',
-      title: "#2 Zingerman' Reuben",
-      price: 18.99,
-      image:
-        'https://d3h3ny262c73zf.cloudfront.net/Zingerman%27s%20Delicatessen/1554405616743.png',
-      amount: 3
-    },
-  ],
+  foodInCart: [],
 };
 
 export default new Vuex.Store({
@@ -33,8 +24,7 @@ export default new Vuex.Store({
   actions: {
     changeCartAmount(context, payload) {
       const cart = context.state.foodInCart;
-      // cart.indexOf(item => {console.log(item.id) === console.log(payload.item.id));
-      if (0 > cart.findIndex(item => item.id === payload.item.id)) {
+      if (0 > cart.findIndex(item => item.id === payload.item.id) && !payload.item.amount) {
         cart.push({
           ...dummyData.find(foodItem => foodItem.id === payload.item.id),
           amount: 1
@@ -50,7 +40,25 @@ export default new Vuex.Store({
         return foodItem;
       });
       context.commit('UPDATE_CART', updatedCart)
+    },
+    removeFromCart(context, payload) {
+      const cart = context.state.foodInCart;
+      const indexOfItem = cart.findIndex(item => item.id === payload.id)
+      if (indexOfItem >= 0) {
+        cart.splice(indexOfItem, 1);
+      }
+      context.commit('UPDATE_CART', cart);
     }
+        // insertToCart(context, payload) {
+    //   const cart = context.state.foodInCart;
+    //   if (0 > cart.findIndex(item => item.id === payload.item.id) && !payload.item.amount) {
+    //     cart.push({
+    //       ...dummyData.find(foodItem => foodItem.id === payload.item.id),
+    //       amount: 1
+    //     })
+    //   }
+    //   context.commit('UPDATE_CART', cart);
+    // },
   }
 });
 

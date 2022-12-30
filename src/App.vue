@@ -58,4 +58,10 @@ a {
   margin: 0;
   color: #222;
 }
+.v-icon::after {
+  opacity: 0 !important;
+}
+.v-ripple__container {
+  opacity: 0 !important;
+}
 </style>

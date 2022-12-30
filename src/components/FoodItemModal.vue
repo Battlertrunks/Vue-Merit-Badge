@@ -28,7 +28,7 @@
             <button class="subtract-cart-btn" @click="changeOrderAmount(cartAmount-1)">
               <v-icon class="fa-solid fa-minus"></v-icon>
             </button>
-            <input v-model.number="cartAmount" v-on:change="inCartAmount" type="number" />
+            <input v-model.number="cartAmount" v-on:mouseleave="inCartAmount" type="number" />
             <button class="add-cart-btn" @click="changeOrderAmount(cartAmount+1)">
               <v-icon class="fa-solid fa-cart-plus"></v-icon>
             </button>
@@ -58,7 +58,7 @@ export default {
   },
   watch: {
     cartAmount(newAmount, oldAmount) {
-      if (newAmount !== oldAmount && newAmount !== oldAmount+1 && newAmount !== oldAmount-1) {
+      if (newAmount !== oldAmount+1 && newAmount !== oldAmount-1 && (newAmount === 0 || newAmount)) {
         this.changeOrderAmount(parseInt(newAmount));
       }
     }
@@ -79,22 +79,24 @@ export default {
     changeOrderAmount(amount) {
       const amountChecked = this.inCartAmount();
       if (amountChecked <= 99 && amountChecked >= 0) {
-        console.log(amountChecked, 'wat');
         this.$store.dispatch('changeCartAmount', { 
           item: this.itemDetails, amount: amount < 0 ? 0 
           : amount > 99 ? 99 : amount 
         });
-        this.inCartAmount();
+
+        if (this.inCartAmount() === 0) {
+          console.log('runs')
+          this.$store.dispatch('removeFromCart', this.itemDetails);
+        }
+        
       } else if (amountChecked >= 100) {
         this.$store.dispatch('changeCartAmount', { item: this.itemDetails, amount: 99 });
       } else if (amountChecked <= -1) {
         this.$store.dispatch('changeCartAmount', { item: this.itemDetails, amount: 0 });
       }
-      console.log(this.$store.getters.checkoutItems);
     },
     inCartAmount() {
       let amount = this.existInCart();
-      console.log(amount);
       if (amount >= 1) {
         this.cartAmount = amount;
         return this.cartAmount;
