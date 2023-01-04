@@ -1,6 +1,6 @@
 <template>
   <v-overlay>
-    <v-card class="modal" width="95%" color="#FAF6F0" :height="checkout ? '30rem' : null">
+    <v-card class="modal" width="95%" color="#FAF6F0" :height="checkout ? '35rem' : null">
       <div>
         <header>
           <slot name="header"></slot>
@@ -50,5 +50,14 @@ span {
 
 .modal .item-img {
   border-radius: 0.334rem;
+}
+
+@media only screen and (min-width: 700px) {
+  .modal {
+    height: 50rem !important;
+    width: 60% !important;
+    min-width: 40rem;
+    max-width: 45rem;
+  }
 }
 </style>

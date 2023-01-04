@@ -19,33 +19,42 @@
     <template>
       <section class="item-container">
         <base-card :card-color="'#fff'" class="pa-4 my-2" v-for="item in inCart" :key="item.id">
-          <div class="title-price-container" @click="openModal(item)">
-            <h4>{{ item.title }}</h4>
-            <p>${{ item.price }}</p>
-          </div>
-          <div class="desc-image-container">
-            <div class="button-container">
-              <button class="subtract-cart-btn" @click="changeOrderAmount(item.amount-1, item)">
-                <v-icon class="fa-solid fa-minus"></v-icon>
-              </button>
-              <input v-model.number="item.amount" v-on:change="inCartAmount(item)" type="number" />
-              <button class="add-cart-btn" @click="changeOrderAmount(item.amount+1, item)">
-                <v-icon class="fa-solid fa-cart-plus"></v-icon>
-              </button>
+          <div class="content-container">
+            <div class="title-price-container" @click="openModal(item)">
+              <h4>{{ item.title }}</h4>
+              <p>${{ item.price }}</p>
+              <p>{{ item.description }}</p>
             </div>
-            <v-img
-              class="item-img"
-              :src="item.image"
-              max-width="100"
-              min-height="75"
-            ></v-img>
+            <div class="desc-image-container">
+              <div class="button-container">
+                <button class="subtract-cart-btn" @click="changeOrderAmount(item.amount-1, item)">
+                  <v-icon class="fa-solid fa-minus"></v-icon>
+                </button>
+                <input v-model.number="item.amount" v-on:change="inCartAmount(item)" type="number" />
+                <button class="add-cart-btn" @click="changeOrderAmount(item.amount+1, item)">
+                  <v-icon class="fa-solid fa-cart-plus"></v-icon>
+                </button>
+              </div>
+              <v-img
+                class="item-img"
+                :src="item.image"
+                max-width="100"
+                min-height="75"
+              ></v-img>
+            </div>
           </div>
         </base-card>
       </section>
     </template>
-    <section class="total-container">
-      <p>Total: ${{ totalCost }}</p>
-      <p>Sub-Total: $0.00</p>
+    <section class="checkout-container">
+      <div class="checkout-btn-container">
+        <v-btn color="#4fb370">Checkout</v-btn>
+        <v-btn color="#f29c1c" @click="closeModel">Back</v-btn>
+      </div>
+      <section class="total-container">
+        <p class="total-text">Total: ${{ totalCost }}</p>
+        <p>Sub-Total: $0.00</p>
+      </section>
     </section>
   </base-modal>
 </template>
@@ -179,8 +188,22 @@ export default {
   margin-bottom: .882rem; */
 }
 .item-container {
-  height: 20rem;
-  overflow-y: scroll;
+  height: 20.552rem;
+  overflow-y: auto;
+}
+.checkout-btn-container {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-around;
+  width: 75%;
+  position: absolute;
+  bottom: 4rem;
+  left: 50%;
+  transform: translatex(-50%);
+}
+.checkout-btn-container button {
+  width: 6.223rem;
+  min-width: 5rem;
 }
 .total-container {
   background-color: #fff;
@@ -193,5 +216,58 @@ export default {
   padding: 0 1rem;
   border-bottom-left-radius: .334rem;
   border-bottom-right-radius: .334rem;
+}
+
+@media only screen and (min-width: 700px) {
+  .content-container {
+    display: flex;
+    flex-direction: row;
+  }
+  .title-price-container {
+    flex: 1;
+  }
+  .desc-image-container {
+    flex: 1;
+  }
+  .item-container {
+  height: 30rem;
+  overflow-y: auto;
+  }
+  .checkout-container {
+    background-color: #fff;
+    position: absolute;
+    bottom: 0;
+    height: 5rem;
+    right: 0;
+    left: 0;
+  }
+  .checkout-btn-container {
+    position: relative;
+    left: 95%;
+    bottom: 0;
+    top: 25%;
+    justify-content: flex-start;
+    transform: translateX(-100%)
+  }
+  .checkout-btn-container button {
+    margin-left: 2rem;
+  }
+  .total-container {
+    background-color: transparent;
+    /* position: relative; */
+    display: block;
+    right: auto;
+  }
+  .total-text {
+    font-size: 1.222rem;
+    font-weight: 700;
+    margin: 0;
+  }
+}
+
+@media only screen and (min-width: 1300px) {
+  .title-price-container {
+    flex: 1.5;
+  }
 }
 </style>

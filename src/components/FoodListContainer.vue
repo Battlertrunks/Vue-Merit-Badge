@@ -94,8 +94,17 @@ div {
   line-clamp: 4;
   -webkit-box-orient: vertical;
 }
-
 .item-img {
   border-radius: 0.336rem;
+}
+
+@media only screen and (min-width: 700px) {
+  ul {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  li {
+    margin: .723rem .552rem;
+  }
 }
 </style>

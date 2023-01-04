@@ -15,23 +15,31 @@
         </header>
       </template>
       <template>
-        <v-img
-          width="55vw"
-          class="mx-auto item-img"
-          :src="itemDetails.image"
-          alt="food image."
-        ></v-img>
-        <p>{{ itemDetails.description }}</p>
-        <div class="bottom-content">
-          <span>${{ itemDetails.price }}</span>
-          <div class="button-container">
-            <button class="subtract-cart-btn" @click="changeOrderAmount(cartAmount-1)">
-              <v-icon class="fa-solid fa-minus"></v-icon>
-            </button>
-            <input v-model.number="cartAmount" v-on:mouseleave="inCartAmount" type="number" />
-            <button class="add-cart-btn" @click="changeOrderAmount(cartAmount+1)">
-              <v-icon class="fa-solid fa-cart-plus"></v-icon>
-            </button>
+        <div class="body-container">
+          <v-img
+            width="55vw"
+            max-width="25rem"
+            max-height="20rem"
+            class="mx-auto item-img"
+            :src="itemDetails.image"
+            alt="food image."
+          ></v-img>
+          <p class="description">{{ itemDetails.description }}</p>
+          <div class="bottom-content">
+            <span>Price: ${{ itemDetails.price }}</span>
+            <div class="button-container">
+              <button class="subtract-cart-btn" @click="changeOrderAmount(cartAmount-1)">
+                <v-icon class="fa-solid fa-minus icon"></v-icon>
+                <p class="mobile-view">Subtract</p>
+                <p class="desktop-view">Subtract from Cart</p>
+              </button>
+              <input v-model.number="cartAmount" v-on:mouseleave="inCartAmount" type="number" />
+              <button class="add-cart-btn" @click="changeOrderAmount(cartAmount+1)">
+                <v-icon class="fa-solid fa-cart-plus icon"></v-icon>
+                <p class="mobile-view">Add</p>
+                <p class="desktop-view">Add to Cart</p>
+              </button>
+            </div>
           </div>
         </div>
       </template>
@@ -132,10 +140,16 @@ span {
 }
 
 .button-container button {
-  padding: 0.442rem 0.654rem;
+  width: 3.552rem;
+  height: 3rem;
+  padding: .552rem 0;
+  font-size: .552rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-.button-container i {
-  font-size: 1.325rem;
+.button-container .icon {
+  font-size: 1.525rem;
 }
 .subtract-cart-btn {
   background-color: #f29c1c;
@@ -160,5 +174,63 @@ span {
 }
 .button-container input:focus {
   outline: none;
+}
+.button-container button p{
+  margin: 0;
+  color: #fff;
+  font-size: .552rem;
+}
+.desktop-view {
+  display: none;
+}
+
+@media only screen and (min-width: 700px) {
+  .modal-heading h3 {
+    font-size: 1.625rem;
+  }
+  .body-container {
+    height: 40rem;
+    display: flex;
+    justify-content: space-around;
+  }
+  .body-container p, .body-container input {
+    font-size: 1.125rem;
+    margin: 0 2rem;
+  }
+  .description {
+    line-height: 1.772rem;
+  }
+  .body-container span {
+    font-size: 1.3rem;
+    margin-right: 3.332rem;
+  }
+  .bottom-content {
+    justify-content: center;
+  }
+  .bottom-content button {
+    padding: 1.552rem 1rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 11.552rem;
+  }
+  .icon {
+    margin-right: .552rem;
+  }
+  .bottom-content input {
+    margin: 0 .552rem;
+    font-size: 1.3rem;
+  }
+  .bottom-content button p {
+    font-size: 1rem;
+    margin-left: 1rem;
+    font-weight: 700;
+  }
+  .mobile-view {
+    display: none;
+  }
+  .desktop-view {
+    display: contents;
+  }
 }
 </style>
