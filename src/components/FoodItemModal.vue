@@ -24,21 +24,23 @@
             :src="itemDetails.image"
             alt="food image."
           ></v-img>
-          <p class="description">{{ itemDetails.description }}</p>
-          <div class="bottom-content">
-            <span>Price: ${{ itemDetails.price }}</span>
-            <div class="button-container">
-              <button class="subtract-cart-btn" @click="changeOrderAmount(cartAmount-1)">
-                <v-icon class="fa-solid fa-minus icon"></v-icon>
-                <p class="mobile-view">Subtract</p>
-                <p class="desktop-view">Subtract from Cart</p>
-              </button>
-              <input v-model.number="cartAmount" v-on:mouseleave="inCartAmount" type="number" />
-              <button class="add-cart-btn" @click="changeOrderAmount(cartAmount+1)">
-                <v-icon class="fa-solid fa-cart-plus icon"></v-icon>
-                <p class="mobile-view">Add</p>
-                <p class="desktop-view">Add to Cart</p>
-              </button>
+          <div class="info-container">
+            <p class="description">{{ itemDetails.description }}</p>
+            <div class="bottom-content">
+              <span>Price: ${{ itemDetails.price }}</span>
+              <div class="button-container">
+                <button class="subtract-cart-btn" @click="changeOrderAmount(cartAmount-1)">
+                  <v-icon class="fa-solid fa-minus icon"></v-icon>
+                  <p class="mobile-view">Subtract</p>
+                  <p class="desktop-view">Subtract from Cart</p>
+                </button>
+                <input v-model.number="cartAmount" v-on:mouseleave="inCartAmount" type="number" />
+                <button class="add-cart-btn" @click="changeOrderAmount(cartAmount+1)">
+                  <v-icon class="fa-solid fa-cart-plus icon"></v-icon>
+                  <p class="mobile-view">Add</p>
+                  <p class="desktop-view">Add to Cart</p>
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -123,7 +125,7 @@ export default {
   justify-content: space-between;
 }
 span {
-  font-size: 18px;
+  font-size: 1rem;
 }
 .bottom-content {
   display: flex;
@@ -140,8 +142,8 @@ span {
 }
 
 .button-container button {
-  width: 3.552rem;
-  height: 3rem;
+  width: 3.332rem;
+  height: 2.662rem;
   padding: .552rem 0;
   font-size: .552rem;
   display: flex;
@@ -149,7 +151,7 @@ span {
   justify-content: center;
 }
 .button-container .icon {
-  font-size: 1.525rem;
+  font-size: 1.125rem;
 }
 .subtract-cart-btn {
   background-color: #f29c1c;
@@ -184,6 +186,11 @@ span {
   display: none;
 }
 
+.info-container p {
+  margin: 2rem 0;
+}
+
+
 @media only screen and (min-width: 700px) {
   .modal-heading h3 {
     font-size: 1.625rem;
@@ -204,18 +211,22 @@ span {
     font-size: 1.3rem;
     margin-right: 3.332rem;
   }
+  .info-container {
+    background-color: #fff;
+    padding: 1rem;
+  }
+  .description {
+    padding-bottom: 1.882rem;
+  }
   .bottom-content {
     justify-content: center;
   }
   .bottom-content button {
-    padding: 1.552rem 1rem;
+    padding: 1.552rem 1.1rem;
     display: flex;
     flex-direction: row;
     justify-content: center;
-    width: 11.552rem;
-  }
-  .icon {
-    margin-right: .552rem;
+    width: 8rem;
   }
   .bottom-content input {
     margin: 0 .552rem;
@@ -223,14 +234,23 @@ span {
   }
   .bottom-content button p {
     font-size: 1rem;
-    margin-left: 1rem;
     font-weight: 700;
+    margin-left: .332rem;
   }
+
+}
+@media only screen and (min-width: 1200px) {
   .mobile-view {
     display: none;
   }
   .desktop-view {
-    display: contents;
+    display: block;
+  }
+  .bottom-content button {
+    width: 11.552rem;
+  }
+  .bottom-content button p {
+    margin-left: .552rem;
   }
 }
 </style>

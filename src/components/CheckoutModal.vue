@@ -48,7 +48,7 @@
     </template>
     <section class="checkout-container">
       <div class="checkout-btn-container">
-        <v-btn color="#4fb370">Checkout</v-btn>
+        <v-btn class="v-btnss" color="#4fb370">Checkout</v-btn>
         <v-btn color="#f29c1c" @click="closeModel">Back</v-btn>
       </div>
       <section class="total-container">
@@ -204,6 +204,7 @@ export default {
 .checkout-btn-container button {
   width: 6.223rem;
   min-width: 5rem;
+  font-weight: 700;
 }
 .total-container {
   background-color: #fff;
