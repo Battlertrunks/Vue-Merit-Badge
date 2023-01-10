@@ -56,7 +56,7 @@
             <a src="">Soups</a>
           </li>
           <li>
-            <a src="">Deli Slides</a>
+            <a src="">Deli Sides</a>
           </li>
           <li>
             <a src="">Jewish Sides</a>

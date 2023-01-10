@@ -27,7 +27,7 @@
           <div class="info-container">
             <p class="description">{{ itemDetails.description }}</p>
             <div class="bottom-content">
-              <span>Price: ${{ itemDetails.price }}</span>
+              <span>Price: ${{ itemDetails.price.toFixed(2) }}</span>
               <div class="button-container">
                 <button class="subtract-cart-btn" @click="changeOrderAmount(cartAmount-1)">
                   <v-icon class="fa-solid fa-minus icon"></v-icon>

@@ -25,10 +25,20 @@ export default new Vuex.Store({
     changeCartAmount(context, payload) {
       const cart = context.state.foodInCart;
       if (0 > cart.findIndex(item => item.id === payload.item.id) && !payload.item.amount) {
-        cart.push({
-          ...dummyData.find(foodItem => foodItem.id === payload.item.id),
-          amount: 1
-        })
+        let item = null;
+        console.log(dummyData);
+        for (const cat in dummyData) {
+          console.log(dummyData[cat], cat) 
+          item = dummyData[cat].food.find(foodItem => foodItem.id === payload.item.id);
+          console.log(item);
+          if (item) break;
+        }
+        if (item) {
+          cart.push({
+            ...item,
+            amount: 1
+          })
+        }
       }
       const updatedCart = cart.map(foodItem => {
         if (foodItem.id === payload.item.id) {
