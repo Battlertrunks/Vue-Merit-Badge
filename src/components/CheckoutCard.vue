@@ -2,8 +2,8 @@
     <div class="content-container">
         <div class="title-price-container" @click="openModal(item)">
             <h4>{{ item.title }}</h4>
-            <p>${{ item.price }}</p>
-            <p>{{ item.description }}</p>
+            <p>${{ item.price.toFixed(2) }}</p>
+            <p class="desc-text">{{ item.description }}</p>
         </div>
         <div class="desc-image-container">
             <div class="button-container">
@@ -40,7 +40,6 @@ export default {
     watch: {
         cartAmount(newAmount, oldAmount) {
         if (newAmount !== oldAmount+1 && newAmount !== oldAmount-1 && (newAmount === 0 || newAmount)) {
-            console.log
             this.changeOrderAmount(parseInt(newAmount));
         }
     }
@@ -49,16 +48,14 @@ export default {
         // This is god awful code that needs to be refactored in the future...
         changeOrderAmount(amount) {
             const amountChecked = this.inCartAmount();
-            console.log(amountChecked);
+
             if (amountChecked <= 99 && amountChecked >= 0) {
-                console.log(amountChecked, 'wat');
                 this.$store.dispatch('changeCartAmount', { 
                 item: this.item, amount: amount < 0 ? 0 
                 : amount > 99 ? 99 : amount 
                 });
 
                 if (this.inCartAmount() === 0) {
-                console.log('runs')
                 this.$store.dispatch('removeFromCart', this.item);
                 }
 
@@ -69,9 +66,7 @@ export default {
             }
         },
         inCartAmount() {
-            console.log(this.$store.getters.checkoutItems);
             let curItem = this.$store.getters.checkoutItems.find(foodItem => foodItem.id === this.item.id);
-            console.log(curItem);
             if (curItem.amount >= 1) {
                 this.cartAmount = curItem.amount;
                 return this.cartAmount;
@@ -84,7 +79,10 @@ export default {
 </script>
 
 <style scoped>
-    .bottom-content {
+.desc-text {
+  display: none;
+}
+.bottom-content {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -148,6 +146,9 @@ export default {
   overflow-y: auto;
 }
 @media only screen and (min-width: 700px) {
+  .desc-text {
+    display: contents;
+  }
   .content-container {
     display: flex;
     flex-direction: row;

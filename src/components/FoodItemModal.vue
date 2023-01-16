@@ -95,7 +95,6 @@ export default {
         });
 
         if (this.inCartAmount() === 0) {
-          console.log('runs')
           this.$store.dispatch('removeFromCart', this.itemDetails);
         }
         

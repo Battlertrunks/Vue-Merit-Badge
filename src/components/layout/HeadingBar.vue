@@ -111,7 +111,6 @@ export default {
   },
   methods: {
     openCheckout() {
-      console.log('run');
       this.$emit('open-checkout');
     },
   },
@@ -216,6 +215,6 @@ li {
 }
 a:hover {
   transition: 1s background-color ease;
-  background-color: #999;
+  background-color: #FAF6F0;
 }
 </style>

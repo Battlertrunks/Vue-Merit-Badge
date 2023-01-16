@@ -6,9 +6,9 @@
       <li v-for="cat in foodItems" :key="cat.id">
         <h4 class="mx-auto category">{{ upperCaseWords(cat.name) }}</h4>
         <ul class="food-items-container">
-          <li v-for="item in cat.food" :key="item.id">
+          <li v-for="item in cat.food" :key="item.id" class="card-container" @click="openModal(item)">
             <base-card class="pa-5">
-              <div class="title-price-container" @click="openModal(item)">
+              <div class="title-price-container">
                 <h4>{{ item.title }}</h4>
                 <p>${{ item.price.toFixed(2) }}</p>
               </div>
@@ -26,25 +26,6 @@
         </ul>
       </li>
     </ul>
-    <!-- <ul>
-      <li v-for="item in foodItems" :key="item.id">
-        <base-card class="pa-5">
-          <div class="title-price-container" @click="openModal(item)">
-            <h4>{{ item.title }}</h4>
-            <p>${{ item.price.toFixed(2) }}</p>
-          </div>
-          <div class="desc-image-container">
-            <p>{{ item.description }}</p>
-            <v-img
-              class="item-img"
-              :src="item.image"
-              max-width="120"
-              min-height="100"
-            ></v-img>
-          </div>
-        </base-card>
-      </li>
-    </ul> -->
     <food-item-modal
       v-if="showModal"
       :item-details="modalItem"
@@ -98,6 +79,16 @@ ul {
 
 li {
   margin: 1.225rem 0;
+}
+
+.card-container {
+  cursor: pointer;
+}
+
+.card-container:hover {
+  transition: .085s outline ease-out;
+  outline: 3px #f29c1c solid;
+  border-radius: 2px;
 }
 
 .type {
