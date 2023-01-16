@@ -15,6 +15,7 @@
             class="fa-solid fa-cart-shopping cart-icon"
             color="#222"
             @click="openCheckout"
+            v-ripple="false"
           ></v-icon>
         </div>
       </v-app-bar>
@@ -55,7 +56,7 @@
             <a src="">Soups</a>
           </li>
           <li>
-            <a src="">Deli Slides</a>
+            <a src="">Deli Sides</a>
           </li>
           <li>
             <a src="">Jewish Sides</a>
@@ -110,7 +111,6 @@ export default {
   },
   methods: {
     openCheckout() {
-      console.log('run');
       this.$emit('open-checkout');
     },
   },
@@ -215,6 +215,6 @@ li {
 }
 a:hover {
   transition: 1s background-color ease;
-  background-color: #999;
+  background-color: #FAF6F0;
 }
 </style>

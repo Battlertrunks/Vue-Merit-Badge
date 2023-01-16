@@ -1,23 +1,29 @@
 <template>
   <v-container>
-    <h3 class="mx-auto mt-5 mb-2">Popualar Choices</h3>
+    <h3 class="mx-auto mt-5 mb-2 type">Popualar Choices</h3>
+    
     <ul>
-      <li v-for="item in foodItems" :key="item.id">
-        <base-card class="pa-5">
-          <div class="title-price-container" @click="openModal(item)">
-            <h4>{{ item.title }}</h4>
-            <p>${{ item.price }}</p>
-          </div>
-          <div class="desc-image-container">
-            <p>{{ item.description }}</p>
-            <v-img
-              class="item-img"
-              :src="item.image"
-              max-width="120"
-              min-height="100"
-            ></v-img>
-          </div>
-        </base-card>
+      <li v-for="cat in foodItems" :key="cat.id">
+        <h4 class="mx-auto category">{{ upperCaseWords(cat.name) }}</h4>
+        <ul class="food-items-container">
+          <li v-for="item in cat.food" :key="item.id" class="card-container" @click="openModal(item)">
+            <base-card class="pa-5">
+              <div class="title-price-container">
+                <h4>{{ item.title }}</h4>
+                <p>${{ item.price.toFixed(2) }}</p>
+              </div>
+              <div class="desc-image-container">
+                <p>{{ item.description }}</p>
+                <v-img
+                  class="item-img"
+                  :src="item.image"
+                  max-width="120"
+                  min-height="100"
+                ></v-img>
+              </div>
+            </base-card>
+          </li>
+        </ul>
       </li>
     </ul>
     <food-item-modal
@@ -54,9 +60,12 @@ export default {
       this.showModal = false;
       this.modalItem = null;
     },
+    upperCaseWords(title) {
+      return title.split(' ').map(word => word[0].toUpperCase() + word.substr(1)).join(' ');
+    }
   },
   mounted() {
-    this.foodItems = [...dummyData];
+    this.foodItems = dummyData;
   },
 };
 </script>
@@ -72,7 +81,26 @@ li {
   margin: 1.225rem 0;
 }
 
-div {
+.card-container {
+  cursor: pointer;
+}
+
+.card-container:hover {
+  transition: .085s outline ease-out;
+  outline: 3px #f29c1c solid;
+  border-radius: 2px;
+}
+
+.type {
+  text-align: center;
+}
+
+.category {
+  text-align: center;
+  display: block;
+}
+
+.title-price-container, .desc-image-container {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -94,8 +122,17 @@ div {
   line-clamp: 4;
   -webkit-box-orient: vertical;
 }
-
 .item-img {
   border-radius: 0.336rem;
+}
+
+@media only screen and (min-width: 700px) {
+  .food-items-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  li {
+    margin: .723rem .552rem;
+  }
 }
 </style>

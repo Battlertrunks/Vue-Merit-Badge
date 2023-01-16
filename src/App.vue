@@ -3,7 +3,7 @@
     <heading-bar v-on:open-checkout="openCheckout"></heading-bar>
     <v-main>
       <food-list-container></food-list-container>
-      <checkout-modal v-if="checkoutVisible"></checkout-modal>
+      <checkout-modal v-if="checkoutVisible" @close-checkout="closeCheckout"></checkout-modal>
     </v-main>
     <footer-bar></footer-bar>
   </v-app>
@@ -30,9 +30,11 @@ export default {
   },
   methods: {
     openCheckout() {
-      console.log('App');
       this.checkoutVisible = true;
     },
+    closeCheckout() {
+      this.checkoutVisible = false;
+    }
   },
 };
 </script>
@@ -55,5 +57,16 @@ a {
   padding: 0;
   margin: 0;
   color: #222;
+}
+.v-icon::after {
+  opacity: 0 !important;
+}
+.v-ripple__container {
+  opacity: 0 !important;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 </style>
