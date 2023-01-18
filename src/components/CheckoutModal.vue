@@ -102,6 +102,10 @@ export default {
   border-bottom-left-radius: .334rem;
   border-bottom-right-radius: .334rem;
 }
+.item-container {
+  height: 21rem;
+  overflow-y: auto;
+  }
 
 @media only screen and (min-width: 700px) {
   .content-container {
@@ -115,7 +119,7 @@ export default {
     flex: 1;
   }
   .item-container {
-  height: 30rem;
+  height: 40rem;
   overflow-y: auto;
   }
   .checkout-container {

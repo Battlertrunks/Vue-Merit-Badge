@@ -1,6 +1,6 @@
 <template>
     <div class="content-container">
-        <div class="title-price-container" @click="openModal(item)">
+        <div class="title-price-container">
             <h4>{{ item.title }}</h4>
             <p>${{ item.price.toFixed(2) }}</p>
             <p class="desc-text">{{ item.description }}</p>
@@ -141,6 +141,15 @@ export default {
   /* margin-right: .882rem;
   margin-bottom: .882rem; */
 }
+.title-price-container {
+  margin-right: 1.112rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
 .item-container {
   height: 20.552rem;
   overflow-y: auto;
@@ -152,6 +161,7 @@ export default {
   .content-container {
     display: flex;
     flex-direction: row;
+    min-height: 7rem;
   }
   .title-price-container {
     flex: 1;
@@ -159,10 +169,7 @@ export default {
   .desc-image-container {
     flex: 1;
   }
-  .item-container {
-  height: 30rem;
-  overflow-y: auto;
-  }
+
   .checkout-container {
     background-color: #fff;
     position: absolute;

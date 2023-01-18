@@ -1,7 +1,6 @@
 <template>
   <v-container>
     <h3 class="mx-auto mt-5 mb-2 type">Popualar Choices</h3>
-    
     <ul>
       <li v-for="cat in foodItems" :key="cat.id">
         <h4 class="mx-auto category">{{ upperCaseWords(cat.name) }}</h4>
