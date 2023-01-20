@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container-header">
     <v-card class="mx-auto" overflow-hidden width="100vw">
       <v-app-bar class="header-container" color="#FAF6F0" prominent height="60">
         <div>
@@ -20,7 +20,7 @@
         </div>
       </v-app-bar>
     </v-card>
-    <v-navigation-drawer v-model="drawer" absolute left temporary>
+    <v-navigation-drawer class="drawer" v-model="drawer" absolute left temporary>
       <v-icon
         :class="`fa-regular fa-circle-left close-icon ${
           drawer ? 'move-close-icon' : ''
@@ -53,46 +53,43 @@
         <h3>Appitizers</h3>
         <ul>
           <li>
-            <a src="">Soups</a>
+            <a href="#1" @click="drawer = false">Soups</a>
           </li>
           <li>
-            <a src="">Deli Sides</a>
+            <a href="#2" @click="drawer = false">Deli Sides</a>
           </li>
           <li>
-            <a src="">Jewish Sides</a>
+            <a href="#3" @click="drawer = false">Jewish Sides</a>
           </li>
         </ul>
         <h3>Sandwiches</h3>
         <ul>
           <li>
-            <a src="">Corned Beef</a>
+            <a href="#4" @click="drawer = false">Corned Beef</a>
           </li>
           <li>
-            <a src="">Pastrami</a>
+            <a href="#5" @click="drawer = false">Pastrami</a>
           </li>
           <li>
-            <a src="">Beef</a>
+            <a href="#6" @click="drawer = false">Beef</a>
           </li>
           <li>
-            <a src="">Turkey</a>
+            <a href="#7" @click="drawer = false">Turkey</a>
           </li>
           <li>
-            <a src="">Chicken</a>
+            <a href="#8" @click="drawer = false">Chicken</a>
           </li>
           <li>
-            <a src="">Pork</a>
+            <a href="#9" @click="drawer = false">Pork</a>
           </li>
           <li>
-            <a src="">Fish</a>
+            <a href="#10" @click="drawer = false">Fish</a>
           </li>
         </ul>
         <h3>Other Options</h3>
         <ul>
           <li>
-            <a src="">Kids Menu</a>
-          </li>
-          <li>
-            <a src="">Desserts</a>
+            <a href="#11" @click="drawer = false">Kids Menu</a>
           </li>
         </ul>
       </div>
@@ -123,11 +120,18 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.container-header {
+  position: fixed;
+  z-index: 1;
+}
 h2,
 h3,
 h4,
 p {
   font-family: 'intra', sans-serif;
+}
+a{
+  text-decoration: none;
 }
 h4 {
   font-size: 0.652rem;
@@ -187,6 +191,9 @@ ul {
 .select-container p {
   font-size: 0.482rem;
   margin: 0;
+}
+.v-navigation-drawer {
+  position: fixed;
 }
 .v-navigation-drawer h2 {
   font-size: 1.115rem;

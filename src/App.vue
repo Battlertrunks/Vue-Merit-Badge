@@ -40,6 +40,9 @@ export default {
 </script>
 
 <style>
+html {
+  scroll-behavior: smooth;
+}
 /* Sets heading typeface */
 h1,
 h2,

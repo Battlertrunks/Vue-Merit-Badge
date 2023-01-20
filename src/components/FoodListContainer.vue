@@ -1,8 +1,7 @@
 <template>
   <v-container>
-    <h3 class="mx-auto mt-5 mb-2 type">Popualar Choices</h3>
     <ul>
-      <li v-for="cat in foodItems" :key="cat.id">
+      <li v-for="cat in foodItems" :key="cat.id" :id="cat.id">
         <h4 class="mx-auto category">{{ upperCaseWords(cat.name) }}</h4>
         <ul class="food-items-container">
           <li v-for="item in cat.food" :key="item.id" class="card-container" @click="openModal(item)">
@@ -82,6 +81,8 @@ li {
 
 .card-container {
   cursor: pointer;
+  width: 100%;
+  margin: 1.5rem auto;
 }
 
 .card-container:hover {
@@ -96,7 +97,9 @@ li {
 
 .category {
   text-align: center;
+  padding-top: 5rem;
   display: block;
+  font-size: 1.445rem;
 }
 
 .title-price-container, .desc-image-container {
@@ -130,8 +133,14 @@ li {
     display: grid;
     grid-template-columns: 1fr 1fr;
   }
-  li {
-    margin: .723rem .552rem;
+  .card-container {
+    width: 90%;
+  }
+}
+
+@media only screen and (min-width: 1300px) {
+  .card-container {
+    max-width: 35rem;
   }
 }
 </style>
