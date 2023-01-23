@@ -30,7 +30,7 @@
       </div>
       <section class="total-container">
         <p class="total-text">Total: ${{ totalCost }}</p>
-        <p>Sub-Total: $0.00</p>
+        <p>Sub-Total: ${{ taxCalc }}</p>
       </section>
     </section>
   </base-modal>
@@ -56,6 +56,15 @@ export default {
           return cart.reduce((acc, cur) => acc + (cur.price * cur.amount), 0).toFixed(2);
       } else {
           return '0.00';
+      }
+    },
+    taxCalc() {
+      const cart = this.$store.getters.checkoutItems;
+      if (cart.length) {
+          const amount = cart.reduce((acc, cur) => acc + (cur.price * cur.amount), 0);
+          return (amount + (amount * .06)).toFixed(2);
+      } else {
+        return '0.00'
       }
     }
   },
