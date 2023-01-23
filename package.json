@@ -8,7 +8,8 @@
     "test:test": "vue-cli-service tests:unit",
     "test": "jest",
     "lint": "vue-cli-service lint",
-    "unit": "jest"
+    "unit": "jest",
+    "prepare": "husky install"
   },
   "dependencies": {
     "core-js": "^3.8.3",
@@ -30,6 +31,7 @@
     "babel-jest": "^27.5.1",
     "eslint": "^7.32.0",
     "eslint-plugin-vue": "^8.0.3",
+    "husky": "^8.0.3",
     "jest": "^27.5.1",
     "node-sass": "^8.0.0",
     "sass": "~1.32.0",
